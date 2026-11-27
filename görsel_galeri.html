@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+     <meta charset="UTF-8">
+     <title>Görsel Galeri</title>
+      <style>
+         body { font-family: Arial, sans-serif; text-align: center; margin: 20px;}
+         #galeri {
+            width: 400px;
+            height: 250px;
+            border: 2px solid #ccc;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+         }
+         img { max-width: 100%; max-height: 100%;}
+         button {
+            margin: 10px;
+            padding: 8px 15px;
+            border: none;
+            background: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+         }
+         button:hover { background: #0056b3;}
+     </style>
+    </head>
+    <body>
+        <h2>Basit Görsel Galeri</h2>
+        <div id="galeri">
+            <img id="gorsel" src="https://picsum.photos/400/250?random=1" alt="Galeri Görseli">
+        </div>
+        <br>
+        <button id="geri">Geri</button>
+        <button id="ileri">İleri</button>
+        <script>
+            const gorsel= document.getElementById("gorsel");
+            const geriBtn= document.getElementById("geri");
+            const ileriBtn= document.getElementById("ileri");
+            let index = 1;
+            ileriBtn.addEventListener("click", function() {
+                index++;
+                if(index >5)index = 1;//5görselden sonra başa dön
+                gorsel.src= `https://picsum.photos/400/250?random=${index}`;
+            });
+            geriBtn.addEventListener("click", function() {
+                index--;
+                if(index < 1) index = 5; // geri gittiğinde sona dön
+                gorsel.src =`https://picsum.photos/400/250?random=1${index}`;
+            });
+        </script>
+    </body>
+</html>
