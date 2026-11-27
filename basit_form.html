@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Form Doğrulama</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            .hata {color: red; font-size: 14px; }
+            input { display: block; margin: 10px 0; padding: 5px; }
+        </style>
+    </head>
+    <body>
+        <h2>Kayıt Formu</h2>
+        <form id="kayitFormu">
+            <label>Ad:</label>
+            <input type="text" id="ad" placeholder="Adınızı girin">
+            <span id="adHata" class="hata"></span><br>
+            <label>E-posta:</label>
+            <input type="text" id="email" placeholder="E-posta adresiniz">
+            <span id="emailHata" class="hata"></span><br>
+            <label>Şifre:</label>
+            <input type="password" id="sifre" placeholder="Şifreniz">
+            <span id="sifreHata" class="hata"></span>
+            <button type="submit">Gönder</button>
+        </form>
+        <script>
+            const form = document.getElementById("kayitFormu");
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();// Sayfanın yanilenmesini engelle
+                let valid = true;
+                // Ad kontrolü 
+                const ad= document.getElementById("ad").value.trim();
+                if(ad==="") {
+                    document.getElementById("adHata").textContent= "Ad alanı boş bırakılamaz.";
+                    valid = false;
+                } else {
+                    document.getElementById("adHata").textContent="";
+                }
+                // E-posta kontrolü
+                const email= document.getElementById("email").value.trim();
+                const emailRegex= /^[^\s@]+@[^\s@]+\.[a-z]{2,3}$/;
+                if(!emailRegex.test(email)) {
+                    document.getElementById("emailHata").textContent= "Geçerli bir e-posta giriniz.";
+                    valid = false;
+                } else {
+                    document.getElementById("emailHata").textContent="";
+                }
+                // Şifre kontrolü
+                const sifre = document.getElementById("sifre").value;
+                if(sifre.length < 6) {
+                    document.getElementById("sifreHata").textContent= "Şifre en az 6 karakter olmalı.";
+                    valid = false;
+                } else {
+                    document.getElementById("sifreHata").textContent="";
+                }
+                if(valid) {
+                    alert("Form başarıyla gönderildi!");
+                }
+            }) ;
+        </script>
+    </body>
+</html>
